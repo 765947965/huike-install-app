@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -22,12 +22,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.id_mini).setOnClickListener(this)
         findViewById<View>(R.id.id_lager).setOnClickListener(this)
-        val metric = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(metric)
-        val height = metric.heightPixels  // 屏幕高度（像素）
-        if (height == 1857) {
+        val model = android.os.Build.BOARD
+        Log.i("cccccccccc", android.os.Build.ID)
+        Log.i("cccccccccc", android.os.Build.PRODUCT)
+        Log.i("cccccccccc", android.os.Build.DEVICE)
+        Log.i("cccccccccc", android.os.Build.BOARD)
+        Log.i("cccccccccc", android.os.Build.MANUFACTURER)
+        Log.i("cccccccccc", android.os.Build.BRAND)
+        Log.i("cccccccccc", android.os.Build.MODEL)
+        Log.i("cccccccccc", android.os.Build.BOOTLOADER)
+        Log.i("cccccccccc", android.os.Build.HARDWARE)
+        if ("3501Q" == model) {
             findViewById<View>(R.id.id_mini).visibility = View.VISIBLE
-        } else if (height == 1866) {
+        } else if ("SABRESD" == model) {
             findViewById<View>(R.id.id_lager).visibility = View.VISIBLE
         }
     }

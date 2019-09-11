@@ -39,15 +39,19 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
     private var dialog: AlertDialog? = null
     private var progressBar: ProgressDialog? = null
     private var broadReceiver: BroadcastReceiver? = null
+    private var isInsertReleaseApp = false
     private val handler = Handler(Looper.getMainLooper(), Handler.Callback { message ->
         when (message.what) {
             1 -> {
+                isInsertReleaseApp = false
                 initChanceApp()
             }
             2 -> {
+                isInsertReleaseApp = false
                 initDebugApp()
             }
             3 -> {
+                isInsertReleaseApp = true
                 initReleaseApp()
             }
         }
@@ -115,6 +119,9 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
                 if ("android.intent.action.PACKAGE_ADDED" == intent?.action) {
                     dismissProcess()
                     showDialog("安装成功")
+                    if(isInsertReleaseApp){
+                        RootCmd.execRootCmd("pm uninstall $packageName")
+                    }
                 }
             }
 

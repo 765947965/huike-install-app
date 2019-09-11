@@ -9,6 +9,7 @@
         android:id="@+id/id_mini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="32寸屏"
         android:textSize="24sp" />
 
@@ -17,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:visibility="gone"
         android:text="42寸屏"
         android:textSize="24sp" />
 

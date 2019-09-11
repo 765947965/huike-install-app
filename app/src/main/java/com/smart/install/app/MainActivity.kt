@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.id_mini).setOnClickListener(this)
         findViewById<View>(R.id.id_lager).setOnClickListener(this)
+        if ("armeabi-v7a" == android.os.Build.CPU_ABI) {
+            findViewById<View>(R.id.id_mini).visibility = View.VISIBLE
+        } else if ("arm64-v8a" == android.os.Build.CPU_ABI) {
+            findViewById<View>(R.id.id_lager).visibility = View.VISIBLE
+        }
     }
 
     override fun onClick(v: View?) {

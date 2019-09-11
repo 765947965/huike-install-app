@@ -258,7 +258,11 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
             Thread.sleep(2000)
             handler.post {
                 dismissProcess()
-                showReboot()
+                if (File("/system/priv-appGcDaemon").exists() || File("/system/priv-appGcMain").exists()) {
+                    showDialog("卸载失败")
+                } else {
+                    showReboot()
+                }
             }
         }
     }
@@ -270,6 +274,8 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
                 dialog = null
                 RootCmd.execRootCmd("reboot")
             }.create()
-        dialog?.show()
+        if (!isFinishing) {
+            dialog?.show()
+        }
     }
 }

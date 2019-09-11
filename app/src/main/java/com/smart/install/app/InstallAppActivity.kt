@@ -247,18 +247,23 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
             Thread.sleep(1000)
             RootCmd.execRootCmd("chmod 777 /system")
             Thread.sleep(1000)
+            val values = ArrayList<String>()
             if (type == 1) {
-                RootCmd.execRootCmd("rm -rf /system/priv-app/SmartGcDaemon")
-                Thread.sleep(2000)
-                RootCmd.execRootCmd("rm -rf /system/priv-app/SmartGcMain")
+                values.addAll(getHkValues())
             } else if (type == 2) {
-                RootCmd.execRootCmd("rm -rf /system/priv-app/SmartGcDaemon")
-                RootCmd.execRootCmd("rm -rf /system/priv-app/SmartGcMain")
+                values.addAll(getXhgValues())
             }
-            Thread.sleep(2000)
+            for (item in values) {
+                RootCmd.execRootCmd("rm -rf $item")
+                Thread.sleep(2000)
+            }
+            var isDelete = true
+            for (item in values) {
+                isDelete = isDelete && !File(item).exists()
+            }
             handler.post {
                 dismissProcess()
-                if (File("/system/priv-app/SmartGcDaemon").exists() || File("/system/priv-app/SmartGcMain").exists()) {
+                if (!isDelete) {
                     showDialog("卸载失败")
                 } else {
                     showReboot()
@@ -277,5 +282,28 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
         if (!isFinishing) {
             dialog?.show()
         }
+    }
+
+
+    private fun getHkValues(): List<String> {
+        val fl = File("/system/priv-app")
+        val values = ArrayList<String>()
+        for (item in fl.list()) {
+            if (item.startsWith("SmartGc")) {
+                values.add("/system/priv-app/$item")
+            }
+        }
+        return values
+    }
+
+    private fun getXhgValues(): List<String> {
+        val fl = File("/system/app")
+        val values = ArrayList<String>()
+        for (item in fl.list()) {
+            if (item.startsWith("SmartGc")) {
+                values.add("/system/app/$item")
+            }
+        }
+        return values
     }
 }

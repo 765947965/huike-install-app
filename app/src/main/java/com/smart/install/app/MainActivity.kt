@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val height = metric.heightPixels  // 屏幕高度（像素）
         if (height == 1857) {
             findViewById<View>(R.id.id_mini).visibility = View.VISIBLE
-        } else if (height == 1080) {
+        } else if (height == 1866) {
             findViewById<View>(R.id.id_lager).visibility = View.VISIBLE
         }
     }

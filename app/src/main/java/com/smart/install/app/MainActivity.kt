@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         permissions()
     }
 
-    private fun initView(){
+    private fun initView() {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.id_mini).setOnClickListener(this)
         findViewById<View>(R.id.id_lager).setOnClickListener(this)
@@ -26,12 +26,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.id_mini -> {
-                startActivity(Intent(this, InstallAppActivity::class.java)
-                    .putExtra(InstallAppActivity.TYPE, 1))
+                startActivity(
+                    Intent(this, InstallAppActivity::class.java)
+                        .putExtra(InstallAppActivity.TYPE, 1)
+                )
             }
             R.id.id_lager -> {
-                startActivity(Intent(this, InstallAppActivity::class.java)
-                    .putExtra(InstallAppActivity.TYPE, 2))
+                startActivity(
+                    Intent(this, InstallAppActivity::class.java)
+                        .putExtra(InstallAppActivity.TYPE, 2)
+                )
             }
         }
     }
@@ -39,11 +43,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     @SuppressLint("CheckResult")
     private fun permissions() {
         RxPermissions(this).requestEachCombined(
-            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
             .subscribe { permission ->
                 when {
                     permission.granted -> {
                         initView()
+                        RootCmd.execRootCmd("am force-stop com.smart.gc.v2")
+                        RootCmd.execRootCmd("am force-stop com.smart.gc.v3")
+                        sendBroadcast(
+                            Intent("com.android.addbar").setPackage(
+                                "com.android.systemui"
+                            )
+                        )
+                        sendBroadcast(Intent("action.SHOW_STATUSBAR"))
                     }
                     permission.shouldShowRequestPermissionRationale -> {
                         permissions()

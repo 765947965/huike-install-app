@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -21,9 +22,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.id_mini).setOnClickListener(this)
         findViewById<View>(R.id.id_lager).setOnClickListener(this)
-        if ("armeabi-v7a" == android.os.Build.CPU_ABI) {
+        val metric = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metric)
+        val height = metric.heightPixels  // 屏幕高度（像素）
+        if (height == 1857) {
             findViewById<View>(R.id.id_mini).visibility = View.VISIBLE
-        } else if ("arm64-v8a" == android.os.Build.CPU_ABI) {
+        } else if (height == 1080) {
             findViewById<View>(R.id.id_lager).visibility = View.VISIBLE
         }
     }

@@ -22,19 +22,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.id_mini).setOnClickListener(this)
         findViewById<View>(R.id.id_lager).setOnClickListener(this)
-        val model = android.os.Build.BOARD
-        Log.i("cccccccccc", android.os.Build.ID)
-        Log.i("cccccccccc", android.os.Build.PRODUCT)
-        Log.i("cccccccccc", android.os.Build.DEVICE)
-        Log.i("cccccccccc", android.os.Build.BOARD)
-        Log.i("cccccccccc", android.os.Build.MANUFACTURER)
-        Log.i("cccccccccc", android.os.Build.BRAND)
-        Log.i("cccccccccc", android.os.Build.MODEL)
-        Log.i("cccccccccc", android.os.Build.BOOTLOADER)
-        Log.i("cccccccccc", android.os.Build.HARDWARE)
-        if ("3501Q" == model) {
+        val model = android.os.Build.MODEL
+        if ("RK3399" == model) {
             findViewById<View>(R.id.id_mini).visibility = View.VISIBLE
-        } else if ("SABRESD" == model) {
+        } else if ("NORCO-M6-General-API" == model) {
             findViewById<View>(R.id.id_lager).visibility = View.VISIBLE
         }
     }

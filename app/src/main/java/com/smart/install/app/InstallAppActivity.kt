@@ -68,7 +68,7 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initView() {
         setContentView(R.layout.install_layout)
-        tips = findViewById(R.id.id_default)
+        tips = findViewById(R.id.tv_tips)
         findViewById<View>(R.id.id_default).setOnClickListener(this)
         findViewById<View>(R.id.id_chance).setOnClickListener(this)
         findViewById<View>(R.id.id_debug).setOnClickListener(this)

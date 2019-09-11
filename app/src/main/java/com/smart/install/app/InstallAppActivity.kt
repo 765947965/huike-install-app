@@ -244,14 +244,18 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
         showProcess("正在卸载...")
         Utils.cacheThreadExecutor.execute {
             RootCmd.execRootCmd("mount -o rw,remount /system")
+            Thread.sleep(1000)
             RootCmd.execRootCmd("chmod 777 /system")
+            Thread.sleep(1000)
             if (type == 1) {
                 RootCmd.execRootCmd("rm -rf /system/priv-appGcDaemon")
+                Thread.sleep(2000)
                 RootCmd.execRootCmd("rm -rf /system/priv-appGcMain")
             } else if (type == 2) {
                 RootCmd.execRootCmd("rm -rf /system/priv-appGcDaemon")
                 RootCmd.execRootCmd("rm -rf /system/priv-appGcMain")
             }
+            Thread.sleep(2000)
             handler.post {
                 dismissProcess()
                 showReboot()

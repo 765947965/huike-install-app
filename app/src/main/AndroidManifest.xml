@@ -3,6 +3,7 @@
     package="com.smart.install.app">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
     <application
         android:allowBackup="true"

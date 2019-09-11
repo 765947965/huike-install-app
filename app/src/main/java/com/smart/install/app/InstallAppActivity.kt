@@ -248,17 +248,17 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
             RootCmd.execRootCmd("chmod 777 /system")
             Thread.sleep(1000)
             if (type == 1) {
-                RootCmd.execRootCmd("rm -rf /system/priv-appGcDaemon")
+                RootCmd.execRootCmd("rm -rf /system/priv-app/GcDaemon")
                 Thread.sleep(2000)
-                RootCmd.execRootCmd("rm -rf /system/priv-appGcMain")
+                RootCmd.execRootCmd("rm -rf /system/priv-app/GcMain")
             } else if (type == 2) {
-                RootCmd.execRootCmd("rm -rf /system/priv-appGcDaemon")
-                RootCmd.execRootCmd("rm -rf /system/priv-appGcMain")
+                RootCmd.execRootCmd("rm -rf /system/priv-app/GcDaemon")
+                RootCmd.execRootCmd("rm -rf /system/priv-app/GcMain")
             }
             Thread.sleep(2000)
             handler.post {
                 dismissProcess()
-                if (File("/system/priv-appGcDaemon").exists() || File("/system/priv-appGcMain").exists()) {
+                if (File("/system/priv-app/GcDaemon").exists() || File("/system/priv-app/GcMain").exists()) {
                     showDialog("卸载失败")
                 } else {
                     showReboot()

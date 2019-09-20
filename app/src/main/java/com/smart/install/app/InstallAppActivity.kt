@@ -252,8 +252,6 @@ class InstallAppActivity : AppCompatActivity(), View.OnClickListener {
         Utils.cacheThreadExecutor.execute {
             RootCmd.execRootCmd("mount -o rw,remount /system")
             Thread.sleep(1000)
-            RootCmd.execRootCmd("chmod 777 /system")
-            Thread.sleep(1000)
             val values = ArrayList<String>()
             if (type == 1) {
                 values.addAll(getHkValues())
